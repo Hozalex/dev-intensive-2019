@@ -7,4 +7,15 @@ object Utils {
         val lastName = parts?.getOrNull(1)
         return firstName to lastName
     }
+
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        val n = firstName?.getOrNull(0)
+        val l = lastName?.getOrNull(0)
+        return when {
+            (n != null && l != null) -> ("$n$l").toUpperCase()
+            (n != null && l == null) -> ("$n").toUpperCase()
+            else -> null
+        }
+
+    }
 }
