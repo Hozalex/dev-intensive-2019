@@ -26,3 +26,8 @@ fun Date.add(value: Int, units: String): Date {
     this.time = time
     return this
 }
+
+fun Date.humanizeDiff(date: Date = Date()): String {
+    TODO()
+
+}
