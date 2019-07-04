@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.models
 
+import ru.skillbranch.devintensive.extensions.format
 import java.util.*
 
 class ImageMessage(
@@ -11,7 +12,7 @@ class ImageMessage(
     var image: String?
 ) : BaseMessage(id, from, chat, isIncoming, date) {
     override fun formatMessage(): String = "id:$id ${from?.firstName} " +
-            "${if (isIncoming) "receive" else "send"} image \"$image\" $date"
+            "${if (isIncoming) "receive" else "send"} image \"$image\" ${date.format()}"
 }
 
 
