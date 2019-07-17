@@ -36,25 +36,28 @@
             android:layout_marginTop="@dimen/spacing_normal_16">
 
         <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_message"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:textColor="@color/color_gray_light"
                 android:layout_weight="1"
                 android:textColorHint="@color/color_gray_light"
-                android:hint="Введите текст"
+                android:hint="@string/add_text"
                 android:paddingTop="@dimen/spacing_normal_16"
                 android:paddingBottom="@dimen/spacing_normal_16"
                 android:layout_marginLeft="@dimen/spacing_normal_16"
                 android:layout_marginRight="@dimen/spacing_normal_16"
         />
 
-        <ImageButton
+        <ImageView
+                android:id="@+id/iv_send"
                 android:layout_width="@dimen/button_large_24"
                 android:layout_height="@dimen/button_large_24"
                 android:src="@drawable/ic_send_black_24dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="@dimen/font_normal_16"/>
+                android:layout_marginEnd="@dimen/font_normal_16"
+                android:contentDescription="@string/send_message"/>
 
     </LinearLayout>
 
