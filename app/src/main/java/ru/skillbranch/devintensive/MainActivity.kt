@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
 
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
+        Log.d("M_MainActivity", "$status $question")
         benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
 
         val (r, g, b) = benderObj.status.color
@@ -75,6 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, TextView.OnEdito
         super.onSaveInstanceState(outState)
         outState?.putString("STATUS", benderObj.status.name)
         outState?.putString("QUESTION", benderObj.question.name)
+        Log.d("M_MainActivity", "quest - ${benderObj.question.name}")
     }
 
     override fun onRestart() {
