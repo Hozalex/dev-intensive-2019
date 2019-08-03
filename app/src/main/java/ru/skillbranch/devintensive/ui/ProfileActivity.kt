@@ -32,12 +32,9 @@ class ProfileActivity : AppCompatActivity() {
         initViews(savedInstanceState)
         initViewModel()
 
-
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
-
-
         viewFields = mapOf(
             "nickname" to tv_nick_name,
             "rank" to tv_rank,
@@ -56,9 +53,13 @@ class ProfileActivity : AppCompatActivity() {
             showCurrentMode(isEditMode)
         }
 
-        btn_switch_theme.setOnClickListener{
+        btn_switch_theme.setOnClickListener {
             viewModel.switchTheme()
         }
+        btn_switch_theme.setOnClickListener {
+            viewModel.switchTheme()
+        }
+
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -86,9 +87,9 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             val icon = if (isEdit) {
-                resources.getDrawable(R.drawable.ic_save_black_24dp)
+                resources.getDrawable(R.drawable.ic_save_black_24dp, theme)
             } else {
-                resources.getDrawable(R.drawable.ic_edit_black_24dp)
+                resources.getDrawable(R.drawable.ic_edit_black_24dp, theme)
             }
             background.colorFilter = filter
             setImageDrawable(icon)
@@ -104,6 +105,11 @@ class ProfileActivity : AppCompatActivity() {
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUI(it) })
+        viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+    }
+
+    private fun updateTheme(mode: Int) {
+        delegate.setLocalNightMode(mode)
     }
 
     private fun updateUI(profile: Profile) {
