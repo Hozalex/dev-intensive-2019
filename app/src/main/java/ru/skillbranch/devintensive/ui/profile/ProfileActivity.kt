@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive.ui
+package ru.skillbranch.devintensive.ui.profile
 
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
