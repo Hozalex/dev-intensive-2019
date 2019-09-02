@@ -1,7 +1,7 @@
 package ru.skillbranch.devintensive.ui.main
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.viewmodels.MainViewModel

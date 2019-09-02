@@ -1,4 +1,4 @@
 package ru.skillbranch.devintensive.repositories
 
-class ChatRepository {
+object ChatRepository {
 }

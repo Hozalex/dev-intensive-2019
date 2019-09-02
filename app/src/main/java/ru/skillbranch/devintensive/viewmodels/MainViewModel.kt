@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 import ru.skillbranch.devintensive.repositories.ChatRepository
 
 class MainViewModel : ViewModel() {
-    private val chatRepository = ChatRepository()
+    private val chatRepository = ChatRepository
 }
