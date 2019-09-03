@@ -11,6 +11,14 @@
         android:layout_height="40dp"
         android:layout_alignParentStart="true" />
 
+    <View
+        android:id="@+id/sv_indicator"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/bg_indicator"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/tv_title_single"/>
+
     <TextView
         android:id="@+id/tv_title_single"
         android:layout_width="match_parent"
@@ -36,7 +44,7 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/color_gray_dark"
         android:textSize="14sp"
-        tools:text="some message about something" />
+        tools:text="one message about something" />
 
     <TextView
         android:id="@+id/tv_date_single"
@@ -51,9 +59,14 @@
     <TextView
         android:id="@+id/tv_counter_single"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/counter_size"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_counter"
+        android:gravity="center"
+        android:minWidth="@dimen/counter_size"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:textColor="@android:color/white"
         android:textSize="10sp"
         tools:text="11" />
