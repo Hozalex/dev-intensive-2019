@@ -25,6 +25,11 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
         holder.bind(items[position])
     }
 
+    fun updateData(data: List<ChatItem>) {
+        items = data
+        notifyDataSetChanged()
+    }
+
     inner class SingleViewHolder(convertView: View) : RecyclerView.ViewHolder(convertView), LayoutContainer {
         override val containerView: View?
             get() = itemView
@@ -40,7 +45,13 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
                 visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
                 text = item.lastMessageDate
             }
-            tv_title_single.text = item.shortDescription
+
+            with(tv_counter_single) {
+                visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
+                text = item.messageCount.toString()
+            }
+            tv_title_single.text = item.title
+            tv_message_single.text = item.shortDescription
         }
     }
 
