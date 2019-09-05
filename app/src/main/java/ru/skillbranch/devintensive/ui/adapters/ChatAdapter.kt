@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_chat_single.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 
-class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
+class ChatAdapter(val listener: (ChatItem) -> Unit) : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
 
     var items: List<ChatItem> = listOf()
 
@@ -22,7 +22,7 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: SingleViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], listener)
     }
 
     fun updateData(data: List<ChatItem>) {
@@ -34,12 +34,12 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
         override val containerView: View?
             get() = itemView
 
-        fun bind(item: ChatItem) {
-            if (item.avatar == null) {
-                iv_avatar_single.setInitials(item.initials)
-            } else {
-                //TODO set drawable
-            }
+        fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
+//            if (item.avatar == null) {
+//                iv_avatar_single.setInitials(item.initials)
+//            } else {
+//                //TODO set drawable
+//            }
             sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
             with(tv_date_single) {
                 visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
@@ -52,6 +52,10 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
             }
             tv_title_single.text = item.title
             tv_message_single.text = item.shortDescription
+
+            itemView.setOnClickListener {
+                listener.invoke(item)
+            }
         }
     }
 

@@ -26,9 +26,9 @@ data class Chat(
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageShort(): Pair<String, String?> = when (val lastMessage = messages.lastOrNull()) {
+    fun lastMessageShort(): String {
         //TODO implement me
-        else ->
+        return "no message"
     }
 
     private fun isSingle(): Boolean = members.size == 1
@@ -41,7 +41,7 @@ data class Chat(
                     user.avatar,
                     Utils.toInitials(user.firstName, user.lastName) ?: "??",
                     "${user.firstName ?: ""} ${user.lastName ?: ""}",
-                    lastMessageShort().first,
+                    lastMessageShort(),
                     unreadableMessageCount(),
                     lastMessageDate()?.shortFormat(),
                     user.isOnline
@@ -52,12 +52,12 @@ data class Chat(
                     null,
                     "",
                     title,
-                    lastMessageShort().first,
+                    lastMessageShort(),
                     unreadableMessageCount(),
                     lastMessageDate()?.shortFormat(),
                     false,
                     ChatType.GROUP,
-                    lastMessageShort().second
+                    lastMessageShort()
             )
         }
     }
