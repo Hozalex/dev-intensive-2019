@@ -3,6 +3,8 @@ package ru.skillbranch.devintensive.models.data
 import androidx.annotation.VisibleForTesting
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
+import ru.skillbranch.devintensive.models.ImageMessage
+import ru.skillbranch.devintensive.models.TextMessage
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -15,20 +17,26 @@ data class Chat(
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
-        //TODO implement me
-        return 0
+        var num = 0
+        for (mes in messages) {
+            if (!mes.isReaded) {
+                num++
+            }
+        }
+        return num
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageDate(): Date? {
-        //TODO implement me
-        return Date()
-    }
+    fun lastMessageDate(): Date? = messages.last().date
+
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageShort(): String {
-        //TODO implement me
-        return "no message"
+    fun lastMessageShort(): Pair<String?, String?> {
+        return if (messages.last() is TextMessage) {
+            (messages.last() as TextMessage).text to messages.last().from.firstName
+        } else {
+            "${messages.last().from.firstName} - send a photo" to messages.last().from.firstName
+        }
     }
 
     private fun isSingle(): Boolean = members.size == 1
@@ -41,7 +49,7 @@ data class Chat(
                     user.avatar,
                     Utils.toInitials(user.firstName, user.lastName) ?: "??",
                     "${user.firstName ?: ""} ${user.lastName ?: ""}",
-                    lastMessageShort(),
+                    lastMessageShort().first,
                     unreadableMessageCount(),
                     lastMessageDate()?.shortFormat(),
                     user.isOnline
@@ -52,12 +60,12 @@ data class Chat(
                     null,
                     "",
                     title,
-                    lastMessageShort(),
+                    lastMessageShort().first,
                     unreadableMessageCount(),
                     lastMessageDate()?.shortFormat(),
                     false,
                     ChatType.GROUP,
-                    lastMessageShort()
+                    lastMessageShort().second
             )
         }
     }
