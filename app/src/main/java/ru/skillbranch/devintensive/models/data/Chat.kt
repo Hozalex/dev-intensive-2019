@@ -27,15 +27,15 @@ data class Chat(
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun lastMessageDate(): Date? = messages.last().date
+    fun lastMessageDate(): Date? = messages.lastOrNull()?.date
 
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String?, String?> {
-        return if (messages.last() is TextMessage) {
-            (messages.last() as TextMessage).text to messages.last().from.firstName
+        return if (messages.lastOrNull() is TextMessage) {
+            (messages.lastOrNull() as TextMessage).text to messages.last().from.firstName
         } else {
-            "${messages.last().from.firstName} - send a photo" to messages.last().from.firstName
+            "${messages.lastOrNull()?.from?.firstName} - send a photo" to messages.lastOrNull()?.from?.firstName
         }
     }
 
